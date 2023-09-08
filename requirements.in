@@ -1,19 +1,13 @@
-numpy
-scipy
-pandas>=1.0.0
-pandas_profiling
-
-matplotlib
-seaborn
-plotly
-
 black
 isort
 pytest
 requests
 
+plotly-express
+streamlit
+
 jupyterlab
 ipywidgets
 ipython
 
-mlflow
+pytesseract

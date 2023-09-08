@@ -1,6 +1,6 @@
 ###################
 # PARAMETERS TO MODIFY
-IMAGE_NAME = image_name
+IMAGE_NAME = calcul_mental
 IMAGE_TAG = 1.0
 ###################
 # FIXED PARAMETERS
@@ -8,7 +8,7 @@ TEST_FOLDER = src/tests
 FORMAT_FOLDER = src
 DOCKER_RUN = docker run -it --entrypoint=bash -w /home -v $(PWD):/home/
 DOCKER_IMAGE = $(IMAGE_NAME):$(IMAGE_TAG)
-DOCKER_IMAGE_PIPTOOLS = piptools:latest # NOTE: this image should already exist
+DOCKER_IMAGE_PIPTOOLS = piptools:latest
 ###################
 
 #
@@ -40,7 +40,7 @@ upgrade:
 .PHONY : run
 run: build
 	$(info ***** Running *****)
-	$(DOCKER_RUN) $(DOCKER_IMAGE)  -c "cd src; python hello_world.py"
+	$(DOCKER_RUN) $(DOCKER_IMAGE)  -c "python src/backend/main.py"
 
 .PHONY : shell
 shell: build
@@ -62,6 +62,11 @@ mlflow_server: build
 	$(info ***** Starting the mlflow server *****)
 	$(DOCKER_RUN) -p 5000:5000 $(DOCKER_IMAGE) -c "mlflow server -h 0.0.0.0"
 
+.PHONY : app
+app: build
+	$(info ***** Starting gradio app *****)
+	$(DOCKER_RUN) -p 8501:8501 $(DOCKER_IMAGE) -c "streamlit run src/frontend/app.py --server.port=8501 --server.address=0.0.0.0"
+
 #
 # Testing
 #
@@ -69,6 +74,16 @@ mlflow_server: build
 tests: build
 	$(info ***** Running all unit tests *****)
 	$(DOCKER_RUN) $(DOCKER_IMAGE) -c "python -m pytest -v --rootdir=$(TEST_FOLDER)"
+
+.PHONY : show_users
+show_users: build
+	$(info ***** Showing all users *****)
+	$(DOCKER_RUN) $(DOCKER_IMAGE) -c "python src/users/users.py"
+
+.PHONY : add_user
+add_user: build
+	$(info ***** Adding a new user *****)
+	$(DOCKER_RUN) $(DOCKER_IMAGE) -c "python src/users/create_new_user.py"
 
 #
 # Formatting
