@@ -1,7 +1,7 @@
 ###################
 # PARAMETERS TO MODIFY
-IMAGE_NAME = calcul_mental
-IMAGE_TAG = 1.0
+IMAGE_NAME = my_ai_tutor
+IMAGE_TAG = latest
 ###################
 # FIXED PARAMETERS
 TEST_FOLDER = src/tests
