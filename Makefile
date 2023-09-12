@@ -66,6 +66,7 @@ mlflow_server: build
 app: build
 	$(info ***** Starting gradio app *****)
 	$(DOCKER_RUN) -p 8501:8501 $(DOCKER_IMAGE) -c "streamlit run src/frontend/app.py --server.port=8501 --server.address=0.0.0.0"
+	#$(DOCKER_RUN) -p 8501:8501 $(DOCKER_IMAGE) -c "streamlit run src/tests/test_0.py --server.port=8501 --server.address=0.0.0.0"
 
 #
 # Testing
@@ -74,16 +75,6 @@ app: build
 tests: build
 	$(info ***** Running all unit tests *****)
 	$(DOCKER_RUN) $(DOCKER_IMAGE) -c "python -m pytest -v --rootdir=$(TEST_FOLDER)"
-
-.PHONY : show_users
-show_users: build
-	$(info ***** Showing all users *****)
-	$(DOCKER_RUN) $(DOCKER_IMAGE) -c "python src/users/users.py"
-
-.PHONY : add_user
-add_user: build
-	$(info ***** Adding a new user *****)
-	$(DOCKER_RUN) $(DOCKER_IMAGE) -c "python src/users/create_new_user.py"
 
 #
 # Formatting
