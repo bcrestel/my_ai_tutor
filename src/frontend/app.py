@@ -1,5 +1,6 @@
 from enum import Enum
 import logging
+import io
 
 import streamlit as st
 from streamlit_cropper import st_cropper
@@ -38,6 +39,10 @@ if picture is not None:
 
     if st.session_state.crop:
         cropped_picture.image(st.session_state.cropped_image, caption="Photo de ton texte croquée", use_column_width=True)
+        # Allow option to download cropped file
+        img_bytes = io.BytesIO()
+        st.session_state.cropped_image.save(img_bytes, format="PNG")  # Save the PIL Image to img_bytes
+        st.sidebar.download_button("Download cropped image", img_bytes, file_name="file.png", mime="image/png")
     else:
         #original_picture.image(picture, caption="Photo de ton texte originale", use_column_width=True)
         image = Image.open(picture)
