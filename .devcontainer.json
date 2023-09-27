@@ -1,5 +1,5 @@
 {
-    "image": "IMAGE_NAME:IMAGE_TAG",
+    "image": "my_ai_tutor:latest",
     "customizations": {
         "vscode": {
             "extensions": ["microsoft.python"]

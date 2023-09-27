@@ -184,6 +184,7 @@ numpy==1.25.2
     #   scipy
     #   statsmodels
     #   streamlit
+    #   streamlit-cropper
 overrides==7.4.0
     # via jupyter-server
 packaging==23.1
@@ -224,6 +225,7 @@ pillow==9.5.0
     # via
     #   pytesseract
     #   streamlit
+    #   streamlit-cropper
 platformdirs==3.10.0
     # via
     #   black
@@ -332,6 +334,10 @@ stack-data==0.6.2
 statsmodels==0.14.0
     # via plotly-express
 streamlit==1.26.0
+    # via
+    #   -r requirements.in
+    #   streamlit-cropper
+streamlit-cropper==0.2.1
     # via -r requirements.in
 tenacity==8.2.3
     # via
