@@ -65,7 +65,8 @@ mlflow_server: build
 .PHONY : app
 app: build
 	$(info ***** Starting gradio app *****)
-	$(DOCKER_RUN) -p 8501:8501 $(DOCKER_IMAGE) -c "streamlit run src/frontend/app.py --server.port=8501 --server.address=0.0.0.0"
+	$(DOCKER_RUN) -p 8501:8501 $(DOCKER_IMAGE) -c "streamlit run src/frontend/app2.py --server.port=8501 --server.address=0.0.0.0"
+	#$(DOCKER_RUN) -p 8501:8501 $(DOCKER_IMAGE) -c "streamlit run src/frontend/app.py --server.port=8501 --server.address=0.0.0.0"
 	#$(DOCKER_RUN) -p 8501:8501 $(DOCKER_IMAGE) -c "streamlit run src/tests/test_0.py --server.port=8501 --server.address=0.0.0.0"
 
 #
